@@ -37,11 +37,6 @@ var compile = function (file) {
     sourceFile = path.join(config.base, file.source);
     destFile = path.join(config.base, file.dest.path);
 
-    Logger.files(sourceFile, false);
-
-    Logger.message('Sourcemap enabled? ' + withSourcemap);
-    Logger.message('Autoprefixer enabled? ' + withAutoprefixer);
-
     process = gulp.src(sourceFile).on('error', function (err) {
         console.error('Error!', err.message);
     });
@@ -72,8 +67,8 @@ var compile = function (file) {
 };
 
 var sassTask = function () {
-    Logger.heading('Compiling SASS files ...');
-
+    Logger.heading('Sass compilation');
+    Logger.message('compiling ...');
     return compileAll(getSass());
 };
 

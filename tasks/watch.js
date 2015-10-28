@@ -33,8 +33,8 @@ var watchAll = function (files) {
 };
 
 var watchTask = function () {
-    Logger.heading('Watching for SASS changes ...');
-
+    Logger.heading('Live coding');
+    Logger.message('Watching for changes ...');
     return watchAll(getSass());
 };
 
