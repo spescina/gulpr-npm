@@ -2,10 +2,12 @@ var gulp = require('gulp'),
     path = require('path'),
     rimraf = require('rimraf'),
     _ = require('lodash'),
-    Logger = require('../Logger');
+    Logger = require('../Logger'),
+    resolve = require('../PathResolver'),
+    config;
 
 var clean = function() {
-    rimraf(path.join(config.base, config.vendor.dest), function(){});
+    rimraf(resolve(config.vendor.dest), function(){});
 };
 
 var buildVendorGlob = function (vendor) {
@@ -13,7 +15,7 @@ var buildVendorGlob = function (vendor) {
 };
 
 var buildVendorDest = function (vendor) {
-    return path.join(config.base, config.vendor.dest, vendor);
+    return path.join(resolve(config.vendor.dest), vendor);
 };
 
 var clone = function () {

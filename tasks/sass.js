@@ -1,13 +1,13 @@
 var gulp = require('gulp'),
-    path = require('path'),
     _ = require('lodash'),
     sass = require('gulp-sass'),
     sourcemaps = require('gulp-sourcemaps'),
     autoprefixer = require('gulp-autoprefixer'),
+    plumber = require('gulp-plumber'),
     Logger = require('../Logger'),
-    Piper = require('../Piper');
-
-var config;
+    Piper = require('../Piper'),
+    resolve = require('../PathResolver'),
+    config;
 
 var getSass = function () {
     var sassFiles = [];
@@ -34,12 +34,11 @@ var compile = function (file) {
     withSourcemap = file.options.sourcemap.enabled ? file.options.sourcemap.enabled : false;
     withAutoprefixer = file.options.autoprefixer.enabled ? file.options.autoprefixer.enabled : false;
 
-    sourceFile = path.join(config.base, file.source);
-    destFile = path.join(config.base, file.dest.path);
+    sourceFile = resolve(file.source);
+    destFile = resolve(file.dest.path);
 
-    process = gulp.src(sourceFile).on('error', function (err) {
-        console.error('Error!', err.message);
-    });
+    process = gulp.src(sourceFile)
+        .pipe(plumber());
 
     piper = new Piper(process);
 

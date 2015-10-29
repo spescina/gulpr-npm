@@ -1,7 +1,9 @@
 var gulp = require('gulp'),
     path = require('path'),
     _ = require('lodash'),
-    Logger = require('../Logger');
+    Logger = require('../Logger'),
+    resolve = require('../PathResolver'),
+    config;
 
 var getSass = function () {
     var sassFiles = [];
@@ -15,27 +17,29 @@ var getSass = function () {
     return sassFiles;
 };
 
-var watchAll = function (files) {
+var watchLint = function(files) {
+    var lintFiles = _.map(files, function (file) {
+        return resolve(file);
+    });
+
+    Logger.files(lintFiles, false);
+    gulp.watch(lintFiles, ['lint']);
+};
+
+var watchSass = function (files) {
     var sassFiles = _.map(files, function (file) {
-        if (file.options.watch.constructor === Array) {
-            return _.map(file.options.watch, function (item) {
-                return path.join(config.base, item);
-            });
-        }
-        else {
-            return path.join(config.base, file.options.watch);
-        }
+        return resolve(file.options.watch);
     });
 
     Logger.files(sassFiles, false);
-
-    return gulp.watch(sassFiles, ['sass']);
+    gulp.watch(sassFiles, ['sass']);
 };
 
 var watchTask = function () {
     Logger.heading('Live coding');
     Logger.message('Watching for changes ...');
-    return watchAll(getSass());
+    watchSass(getSass());
+    watchLint(config.lint);
 };
 
 var task = function (configFile) {
