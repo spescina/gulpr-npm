@@ -12,7 +12,7 @@ var gulp = require('gulp'),
 var getSass = function () {
     var sassFiles = [];
 
-    _.each(config['styles'], function (file) {
+    _.each(config.styles, function (file) {
         sassFiles.push.apply(sassFiles, _.filter(file.files, function (item) {
             return (typeof item === 'object') && (item.type === 'sass')
         }));

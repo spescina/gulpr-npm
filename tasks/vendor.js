@@ -27,9 +27,9 @@ var clone = function () {
 
 var vendorTask = function () {
     Logger.heading('Vendor packages');
-    Logger.message('Cleaning ...');
+    Logger.message('cleaning ...');
     clean();
-    Logger.message('Cloning ...');
+    Logger.message('cloning ...');
     return clone();
 };
 
