@@ -14,7 +14,7 @@ var lint = function () {
 
 var lintTask = function () {
     Logger.heading('JS Lint');
-    Logger.message('Linting ...');
+    Logger.message('linting ...');
     return lint();
 };
 

@@ -6,7 +6,7 @@ var fs = require('fs'),
 
 var cacheBustTask = function () {
     Logger.heading('CacheBust');
-    Logger.message('Generating hash ...');
+    Logger.message('generating hash ...');
     var random = randomString.generate();
     return fs.writeFileSync(resolve('cacheBust.json'), '{"value": "' + random + '"}');
 };
