@@ -1,0 +1,19 @@
+{
+  "name": "gulpr",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git@github.com/zuccadev/gulpr-npm.git"
+  },
+  "author": "Simone Pescina <s.pescina@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zuccadev/gulpr-npm/issues"
+  },
+  "homepage": "https://github.com/zuccadev/gulpr-npm#readme"
+}
