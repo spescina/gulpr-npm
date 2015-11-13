@@ -7,7 +7,13 @@ var gulp = require('gulp'),
     config;
 
 var lint = function () {
-    gulp.src(resolve(config.lint))
+    var src = resolve(config.lint.included);
+
+    _.each(resolve(config.lint.excluded), function(item){
+        src.push('!' + item);
+    });
+
+    gulp.src(src)
         .pipe(eslint())
         .pipe(eslint.format());
 };
