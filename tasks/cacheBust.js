@@ -8,7 +8,10 @@ var cacheBustTask = function () {
     Logger.heading('CacheBust');
     Logger.message('generating hash ...');
     var random = randomString.generate();
-    return fs.writeFileSync(resolve('cacheBust.json'), '{"value": "' + random + '"}');
+    fs.writeFileSync(resolve('cacheBust.json'), '{"value": "' + random + '"}');
+
+    Logger.info('Cacheust complete');
+    return;
 };
 
 var task = function (configFile) {

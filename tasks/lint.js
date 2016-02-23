@@ -16,6 +16,9 @@ var lint = function () {
     gulp.src(src)
         .pipe(eslint())
         .pipe(eslint.format());
+
+    Logger.info('Lint complete');
+    return;
 };
 
 var lintTask = function () {

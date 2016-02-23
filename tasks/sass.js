@@ -68,7 +68,9 @@ var compile = function (file) {
 var sassTask = function () {
     Logger.heading('Sass compilation');
     Logger.message('compiling ...');
-    return compileAll(getSass());
+    compileAll(getSass());
+    Logger.info('Sass complete');
+    return;
 };
 
 var task = function (configFile) {

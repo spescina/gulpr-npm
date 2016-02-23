@@ -1,18 +1,13 @@
 var gulp = require('gulp'),
     path = require('path'),
-    rimraf = require('rimraf'),
     _ = require('lodash'),
     concat = require('gulp-concat'),
     minify = require('gulp-minify'),
     rename = require('gulp-rename'),
     Logger = require('../Logger'),
     resolve = require('../PathResolver'),
+    q = require('q'),
     config;
-
-var clean = function () {
-    rimraf(resolve(path.join(config.dist.base, config.dist.scripts)), function () {
-    });
-};
 
 var getScripts = function (key) {
     return _.map(config.scripts[key].files, function (item) {
@@ -33,15 +28,25 @@ var optimize = function (key) {
 };
 
 var optimizeAll = function () {
+    var queue = _.size(config.scripts);
+    var deferred = q.defer();
+
     _.each(config.scripts, function (file, key) {
         optimize(key);
+
+        queue--;
+
+        if (queue == 0) {
+            Logger.info('Scripts complete');
+            deferred.resolve();
+        }
     });
+
+    return deferred.promise;
 };
 
 var scriptsTask = function () {
     Logger.heading('Scripts optimizations');
-    Logger.message('cleaning ...');
-    clean();
     Logger.message('optimizing ...');
     return optimizeAll();
 };

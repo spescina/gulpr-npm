@@ -1,17 +1,13 @@
 var gulp = require('gulp'),
     path = require('path'),
-    rimraf = require('rimraf'),
     _ = require('lodash'),
     concat = require('gulp-concat'),
     cssmin = require('gulp-cssmin'),
     rename = require('gulp-rename'),
     Logger = require('../Logger'),
     resolve = require('../PathResolver'),
+    q = require('q'),
     config;
-
-var clean = function() {
-    rimraf(resolve(path.join(config.dist.base, config.dist.styles)), function(){});
-};
 
 var getStyles = function(key) {
     var stylesFiles = [];
@@ -35,15 +31,25 @@ var optimize = function(key) {
 };
 
 var optimizeAll = function() {
+    var queue = _.size(config.styles);
+    var deferred = q.defer();
+
     _.each(config.styles, function(file, key) {
         optimize(key);
+
+        queue--;
+
+        if (queue == 0) {
+            Logger.info('Styles complete');
+            deferred.resolve();
+        }
     });
+
+    return deferred.promise;
 };
 
 var stylesTask = function () {
     Logger.heading('Styles optimizations');
-    Logger.message('cleaning ...');
-    clean();
     Logger.message('optimizing ...');
     return optimizeAll();
 };

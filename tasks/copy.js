@@ -16,18 +16,19 @@ var buildCopyDest = function (copy) {
 };
 
 var clone = function () {
-    var queue = config.copy.length;
+    var queue = _.size(config.copy);
     var deferred = q.defer();
-
+    
     _.each(config.copy, function (copy) {
-        fsExtra.copy(buildCopyGlob(copy), buildCopyDest(copy), function () {
-            Logger.message(' ... done!');
-            queue--;
+        fsExtra.copySync(buildCopyGlob(copy), buildCopyDest(copy));
+        Logger.message(' ... done!');
 
-            if (!queue) {
-                deferred.resolve();
-            }
-        });
+        queue--;
+
+        if (queue == 0) {
+            Logger.info('Copy complete');
+            deferred.resolve();
+        }
     });
 
     return deferred.promise;

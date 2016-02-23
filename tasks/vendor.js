@@ -33,9 +33,11 @@ var clone = function () {
     _.each(config.vendor.packages, function (vendor) {
         fsExtra.copy(buildVendorGlob(vendor), buildVendorDest(vendor), function () {
             Logger.message(vendor + ' ... done!');
+
             queue--;
 
-            if (!queue) {
+            if (queue == 0) {
+                Logger.info('Vendor complete');
                 deferred.resolve();
             }
         });

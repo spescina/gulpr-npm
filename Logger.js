@@ -24,6 +24,21 @@ Logger.heading = function(heading) {
     return Logger;
 };
 
+/**
+ * Log a info message to the console.
+ *
+ * @param {string} info
+ */
+Logger.info = function(info) {
+    console.log(''); // line break
+
+    console.log(
+        gutil.colors.white(gutil.colors.bgBlue(info))
+    );
+
+    return Logger;
+};
+
 
 /**
  * Log a general message to the console.
