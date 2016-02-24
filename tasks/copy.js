@@ -18,7 +18,7 @@ var buildCopyDest = function (copy) {
 var clone = function () {
     var queue = _.size(config.copy);
     var deferred = q.defer();
-    
+
     _.each(config.copy, function (copy) {
         fsExtra.copySync(buildCopyGlob(copy), buildCopyDest(copy));
         Logger.message(' ... done!');
