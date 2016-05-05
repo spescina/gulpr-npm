@@ -10,7 +10,7 @@ var cacheBustTask = function () {
     var random = randomString.generate();
     fs.writeFileSync(resolve('cacheBust.json'), '{"value": "' + random + '"}');
 
-    Logger.info('Cacheust complete');
+    Logger.info('CacheBust complete');
     return;
 };
 
