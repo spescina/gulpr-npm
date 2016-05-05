@@ -1,6 +1,6 @@
 {
   "name": "gulpr",
-  "version": "0.0.0",
+  "version": "v1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -15,5 +15,25 @@
   "bugs": {
     "url": "https://github.com/zuccadev/gulpr-npm/issues"
   },
-  "homepage": "https://github.com/zuccadev/gulpr-npm#readme"
+  "homepage": "https://github.com/zuccadev/gulpr-npm#readme",
+  "dependencies": {
+    "fs-extra": "^0.26.4",
+    "gulp": "^3.9.0",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-cssmin": "^0.1.7",
+    "gulp-eslint": "^1.0.0",
+    "gulp-load-plugins": "^0.10.0",
+    "gulp-minify": "0.0.5",
+    "gulp-plumber": "^1.0.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.2.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-util": "^3.0.7",
+    "lodash": "^3.10.1",
+    "q": "^1.4.1",
+    "randomstring": "^1.1.0",
+    "rimraf": "^2.4.3",
+    "run-sequence": "^1.1.5"
+  }
 }
